@@ -6,7 +6,7 @@
 /*   By: helin <helin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 15:23:33 by helin             #+#    #+#             */
-/*   Updated: 2025/04/23 15:23:34 by helin            ###   ########.fr       */
+/*   Updated: 2025/05/01 11:31:35 by helin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 size_t	ft_strlen(const char *s)
 {
-	size_t i = 0;
+	size_t	i;
+
+	i = 0;
 	while (s && s[i])
 		i++;
 	return (i);
@@ -37,9 +39,15 @@ char	*ft_strchr(const char *s, int c)
 
 char	*ft_strjoin(char *s1, char *s2)
 {
-	size_t	i = 0, j = 0;
-	size_t	len = ft_strlen(s1) + ft_strlen(s2);
-	char	*res = malloc(len + 1);
+	size_t	len;
+	char	*res;
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	j = 0;
+	len = ft_strlen(s1) + ft_strlen(s2);
+	res = malloc(len + 1);
 	if (!res)
 		return (NULL);
 	while (s1 && s1[i])
@@ -54,31 +62,11 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (res);
 }
 
-char	*ft_substr(char *s, unsigned int start, size_t len)
+t_fdnode	*get_fd_node(t_fdnode **head, int fd)
 {
-	size_t	i = 0;
-	char	*res;
+	t_fdnode	*curr;
 
-	if (!s || start >= ft_strlen(s))
-		return (NULL);
-	if (len > ft_strlen(s + start))
-		len = ft_strlen(s + start);
-	res = malloc(len + 1);
-	if (!res)
-		return (NULL);
-	while (i < len && s[start + i])
-	{
-		res[i] = s[start + i];
-		i++;
-	}
-	res[i] = '\0';
-	return (res);
-}
-
-t_fdnode *get_fd_node(t_fdnode **head, int fd)
-{
-	t_fdnode *curr = *head;
-
+	curr = *head;
 	while (curr)
 	{
 		if (curr->fd == fd)
@@ -97,9 +85,11 @@ t_fdnode *get_fd_node(t_fdnode **head, int fd)
 
 void	remove_fd_node(t_fdnode **head, int fd)
 {
-	t_fdnode *curr = *head;
-	t_fdnode *prev = NULL;
+	t_fdnode	*curr;
+	t_fdnode	*prev;
 
+	curr = *head;
+	prev = NULL;
 	while (curr)
 	{
 		if (curr->fd == fd)
@@ -110,7 +100,7 @@ void	remove_fd_node(t_fdnode **head, int fd)
 				*head = curr->next;
 			free(curr->stash);
 			free(curr);
-			return;
+			return ;
 		}
 		prev = curr;
 		curr = curr->next;

@@ -6,15 +6,39 @@
 /*   By: helin <helin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 15:23:24 by helin             #+#    #+#             */
-/*   Updated: 2025/04/23 15:23:26 by helin            ###   ########.fr       */
+/*   Updated: 2025/05/01 11:31:44 by helin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
+char	*ft_substr(char *s, unsigned int start, size_t len)
+{
+	size_t	i;
+	char	*res;
+
+	i = 0;
+	if (!s || start >= ft_strlen(s))
+		return (NULL);
+	if (len > ft_strlen(s + start))
+		len = ft_strlen(s + start);
+	res = malloc(len + 1);
+	if (!res)
+		return (NULL);
+	while (i < len && s[start + i])
+	{
+		res[i] = s[start + i];
+		i++;
+	}
+	res[i] = '\0';
+	return (res);
+}
+
 char	*extract_line(char *stash)
 {
-	size_t	i = 0;
+	size_t	i;
+
+	i = 0;
 	if (!stash)
 		return (NULL);
 	while (stash[i] && stash[i] != '\n')
@@ -26,9 +50,10 @@ char	*extract_line(char *stash)
 
 char	*clean_stash(char *stash)
 {
-	size_t	i = 0;
+	size_t	i;
 	char	*rest;
 
+	i = 0;
 	while (stash[i] && stash[i] != '\n')
 		i++;
 	if (!stash[i])

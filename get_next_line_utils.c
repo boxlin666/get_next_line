@@ -6,7 +6,7 @@
 /*   By: helin <helin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 14:52:53 by helin             #+#    #+#             */
-/*   Updated: 2025/04/23 15:09:41 by helin            ###   ########.fr       */
+/*   Updated: 2025/05/01 11:04:24 by helin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 size_t	ft_strlen(const char *s)
 {
-	size_t i = 0;
+	size_t	i;
+
+	i = 0;
 	while (s && s[i])
 		i++;
 	return (i);
@@ -35,11 +37,17 @@ char	*ft_strchr(const char *s, int c)
 
 char	*ft_strjoin(char *s1, char *s2)
 {
-	size_t	len1 = ft_strlen(s1);
-	size_t	len2 = ft_strlen(s2);
-	char	*res = malloc(len1 + len2 + 1);
-	size_t	i = 0, j = 0;
+	size_t	len1;
+	size_t	len2;
+	char	*res;
+	size_t	i;
+	size_t	j;
 
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	res = malloc(len1 + len2 + 1);
+	i = 0;
+	j = 0;
 	if (!res)
 		return (NULL);
 	while (s1 && i < len1)
@@ -55,8 +63,9 @@ char	*ft_strjoin(char *s1, char *s2)
 char	*ft_substr(char *s, unsigned int start, size_t len)
 {
 	char	*sub;
-	size_t	i = 0;
+	size_t	i;
 
+	i = 0;
 	if (!s || start >= ft_strlen(s))
 		return (NULL);
 	sub = malloc(len + 1);
